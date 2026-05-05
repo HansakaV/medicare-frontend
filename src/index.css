@@ -30,6 +30,23 @@ body {
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+  }
+  
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-white;
+  }
+
+  .dark p, .dark span, .dark label {
+    @apply text-slate-300;
+  }
+
+  /* Smooth transition for all elements when theme changes */
+  * {
+    @apply transition-colors duration-300;
   }
 }
