@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/useAuthStore';
 import { MainLayout } from './components/Layout';
 import { Login } from './pages/Login';
+import { Landing } from './pages/Landing';
 import { Dashboard } from './pages/Dashboard';
 
 import { Patients } from './pages/Patients';
@@ -27,18 +28,20 @@ function App() {
       <Toaster position="top-right" richColors />
       <Routes>
 
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         
         <Route path="/*" element={
           <ProtectedRoute>
             <MainLayout>
               <Routes>
-                <Route index element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="patients" element={<Patients />} />
                 <Route path="queue" element={<Queue />} />
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="billing" element={<Billing />} />
                 <Route path="sms" element={<SMS />} />
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>
             </MainLayout>
           </ProtectedRoute>

@@ -146,7 +146,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const getPageTitle = () => {
     const path = location.pathname.split('/')[1];
     switch (path) {
-      case '': return 'Dashboard Overview';
+      case 'dashboard': return 'Dashboard Overview';
       case 'patients': return 'Patient Management';
       case 'queue': return 'Today\'s Queue';
       case 'inventory': return 'Medicine Inventory';
@@ -170,7 +170,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
 
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-          <SidebarLink to="/" type="dashboard" label="Dashboard" />
+          <SidebarLink to="/dashboard" type="dashboard" label="Dashboard" />
           <SidebarLink to="/patients" type="patients" label="Patients" />
           <SidebarLink to="/queue" type="queue" label="Queue" />
           <SidebarLink to="/inventory" type="inventory" label="Inventory" />

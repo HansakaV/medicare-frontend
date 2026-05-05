@@ -10,6 +10,7 @@ import {
   Stethoscope,
   Activity,
   CheckCircle2,
+  ArrowRight
 } from "lucide-react";
 import anime from "animejs";
 import { useAuthStore } from "../store/useAuthStore";
@@ -164,7 +165,7 @@ export const Login = () => {
         loginStore(data.data, data.token);
         showToast("Account created successfully!", "success");
       }
-      navigate("/");
+      navigate("/dashboard");
     } catch (err: any) {
       const msg = err.response?.data?.message || `Invalid ${isLogin ? "email or password" : "registration details"}`;
       setError(msg);
@@ -290,6 +291,15 @@ export const Login = () => {
         className="flex-1 flex items-center justify-center p-6 bg-white z-10 overflow-y-auto"
       >
         <div className="w-full max-w-[360px] py-8">
+          {/* Back to Home Button */}
+          <button 
+            onClick={() => navigate('/')}
+            className="mb-8 flex items-center gap-2 text-[10px] font-black text-slate-400 hover:text-emerald-600 uppercase tracking-widest transition-colors group"
+          >
+            <ArrowRight className="h-4 w-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
+            Back to Home
+          </button>
+
           <div className="lg:hidden flex flex-col items-center mb-6">
             <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white mb-2">
               <Pill className="h-6 w-6" />
