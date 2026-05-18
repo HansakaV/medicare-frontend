@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Users,
-  Clock,
   Pill,
   TrendingUp,
   ChevronRight,
@@ -16,11 +14,17 @@ import { medicineService } from "../services/medicineService";
 
 import anime from "animejs";
 
-const CharacterIcon = ({ type, color }: { type: 'patients' | 'tokens' | 'stock', color: string }) => {
+const CharacterIcon = ({
+  type,
+  color,
+}: {
+  type: "patients" | "tokens" | "stock";
+  color: string;
+}) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'));
+    setIsDark(document.documentElement.classList.contains("dark"));
 
     // Blinking Eyes Animation
     anime({
@@ -29,7 +33,7 @@ const CharacterIcon = ({ type, color }: { type: 'patients' | 'tokens' | 'stock',
       duration: 200,
       delay: () => anime.random(2000, 5000),
       loop: true,
-      easing: 'easeInOutSine'
+      easing: "easeInOutSine",
     });
 
     // Floating Animation
@@ -37,43 +41,136 @@ const CharacterIcon = ({ type, color }: { type: 'patients' | 'tokens' | 'stock',
       targets: `.char-container-${type}`,
       translateY: [-2, 2],
       duration: 1500,
-      direction: 'alternate',
+      direction: "alternate",
       loop: true,
-      easing: 'easeInOutQuad'
+      easing: "easeInOutQuad",
     });
   }, [type]);
 
-  const fill = color.includes('emerald') ? '#10b981' : color.includes('blue') ? '#3b82f6' : '#f59e0b';
-  const bg = isDark ? (color.includes('emerald') ? '#064e3b33' : color.includes('blue') ? '#1e3a8a33' : '#78350f33') : (color.includes('emerald') ? '#ecfdf5' : color.includes('blue') ? '#eff6ff' : '#fff7ed');
+  const fill = color.includes("emerald")
+    ? "#10b981"
+    : color.includes("blue")
+      ? "#3b82f6"
+      : "#f59e0b";
+  const bg = isDark
+    ? color.includes("emerald")
+      ? "#064e3b33"
+      : color.includes("blue")
+        ? "#1e3a8a33"
+        : "#78350f33"
+    : color.includes("emerald")
+      ? "#ecfdf5"
+      : color.includes("blue")
+        ? "#eff6ff"
+        : "#fff7ed";
 
   return (
-    <div className={`char-container-${type} w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300`} style={{ backgroundColor: bg }}>
+    <div
+      className={`char-container-${type} w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300`}
+      style={{ backgroundColor: bg }}
+    >
       <svg viewBox="0 0 100 100" className="w-10 h-10">
-        <circle cx="50" cy="40" r="25" fill={fill} opacity={isDark ? "0.3" : "0.2"} />
-        {type === 'patients' && (
+        <circle
+          cx="50"
+          cy="40"
+          r="25"
+          fill={fill}
+          opacity={isDark ? "0.3" : "0.2"}
+        />
+        {type === "patients" && (
           <g>
             <circle cx="50" cy="45" r="20" fill={fill} />
-            <circle className={`char-eye-${type}`} cx="43" cy="42" r="2" fill="white" />
-            <circle className={`char-eye-${type}`} cx="57" cy="42" r="2" fill="white" />
-            <path d="M45 52 Q50 56 55 52" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <circle
+              className={`char-eye-${type}`}
+              cx="43"
+              cy="42"
+              r="2"
+              fill="white"
+            />
+            <circle
+              className={`char-eye-${type}`}
+              cx="57"
+              cy="42"
+              r="2"
+              fill="white"
+            />
+            <path
+              d="M45 52 Q50 56 55 52"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </g>
         )}
-        {type === 'tokens' && (
+        {type === "tokens" && (
           <g>
             <rect x="35" y="30" width="30" height="40" rx="5" fill={fill} />
-            <rect x="40" y="35" width="20" height="2" fill="white" opacity="0.5" />
-            <rect x="40" y="42" width="20" height="2" fill="white" opacity="0.5" />
-            <circle className={`char-eye-${type}`} cx="45" cy="55" r="2" fill="white" />
-            <circle className={`char-eye-${type}`} cx="55" cy="55" r="2" fill="white" />
+            <rect
+              x="40"
+              y="35"
+              width="20"
+              height="2"
+              fill="white"
+              opacity="0.5"
+            />
+            <rect
+              x="40"
+              y="42"
+              width="20"
+              height="2"
+              fill="white"
+              opacity="0.5"
+            />
+            <circle
+              className={`char-eye-${type}`}
+              cx="45"
+              cy="55"
+              r="2"
+              fill="white"
+            />
+            <circle
+              className={`char-eye-${type}`}
+              cx="55"
+              cy="55"
+              r="2"
+              fill="white"
+            />
           </g>
         )}
-        {type === 'stock' && (
+        {type === "stock" && (
           <g>
             <path d="M40 30 L60 30 L65 70 L35 70 Z" fill={fill} />
-            <rect x="42" y="25" width="16" height="5" rx="2" fill={fill} opacity="0.8" />
-            <circle className={`char-eye-${type}`} cx="45" cy="45" r="2" fill="white" />
-            <circle className={`char-eye-${type}`} cx="55" cy="45" r="2" fill="white" />
-            <path d="M47 55 L53 55" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <rect
+              x="42"
+              y="25"
+              width="16"
+              height="5"
+              rx="2"
+              fill={fill}
+              opacity="0.8"
+            />
+            <circle
+              className={`char-eye-${type}`}
+              cx="45"
+              cy="45"
+              r="2"
+              fill="white"
+            />
+            <circle
+              className={`char-eye-${type}`}
+              cx="55"
+              cy="45"
+              r="2"
+              fill="white"
+            />
+            <path
+              d="M47 55 L53 55"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </g>
         )}
       </svg>
@@ -94,8 +191,12 @@ const StatCard = ({ title, value, type, trend, color }: any) => (
         )}
       </div>
       <div>
-        <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{title}</h3>
-        <p className="text-2xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight">{value}</p>
+        <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          {title}
+        </h3>
+        <p className="text-2xl font-black text-slate-900 dark:text-white mt-0.5 tracking-tight">
+          {value}
+        </p>
       </div>
     </CardContent>
   </Card>
@@ -110,7 +211,6 @@ export const Dashboard = () => {
     lowStock: 0,
   });
   const [recentQueue, setRecentQueue] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -131,22 +231,20 @@ export const Dashboard = () => {
       } catch (err) {
         console.error("Error fetching dashboard stats:", err);
         setIsSystemActive(false);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchStats();
-    
+
     // Animation for the active indicator
     if (isSystemActive) {
       anime({
-        targets: '.status-dot',
+        targets: ".status-dot",
         scale: [1, 1.5, 1],
         opacity: [1, 0.5, 1],
         duration: 2000,
         loop: true,
-        easing: 'easeInOutSine'
+        easing: "easeInOutSine",
       });
     }
   }, [isSystemActive]);
@@ -155,7 +253,9 @@ export const Dashboard = () => {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white">Health Overview</h1>
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+            Health Overview
+          </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Welcome back! Here's what's happening today.
           </p>
@@ -170,9 +270,13 @@ export const Dashboard = () => {
             })}
           </p>
           <div className="flex items-center justify-end gap-2 mt-0.5">
-            <div className={`status-dot w-1.5 h-1.5 rounded-full ${isSystemActive ? 'bg-emerald-500' : 'bg-red-500'}`} />
-            <p className={`text-[10px] font-bold uppercase tracking-wider ${isSystemActive ? 'text-emerald-600' : 'text-red-600'}`}>
-              {isSystemActive ? 'System is active' : 'System under Maintenance'}
+            <div
+              className={`status-dot w-1.5 h-1.5 rounded-full ${isSystemActive ? "bg-emerald-500" : "bg-red-500"}`}
+            />
+            <p
+              className={`text-[10px] font-bold uppercase tracking-wider ${isSystemActive ? "text-emerald-600" : "text-red-600"}`}
+            >
+              {isSystemActive ? "System is active" : "System under Maintenance"}
             </p>
           </div>
         </div>
@@ -206,7 +310,9 @@ export const Dashboard = () => {
         {/* Recent Queue */}
         <Card className="lg:col-span-2">
           <div className="px-5 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-            <h3 className="font-bold text-sm text-slate-900 dark:text-white">Current Queue</h3>
+            <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+              Current Queue
+            </h3>
             <button
               onClick={() => navigate("/queue")}
               className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center"
@@ -285,7 +391,9 @@ export const Dashboard = () => {
         </Card>
 
         <div className="space-y-4">
-          <h3 className="font-bold text-sm text-slate-900 dark:text-white px-1">Quick Actions</h3>
+          <h3 className="font-bold text-sm text-slate-900 dark:text-white px-1">
+            Quick Actions
+          </h3>
           <div className="grid grid-cols-1 gap-2">
             <button
               onClick={() => navigate("/patients")}
@@ -294,7 +402,9 @@ export const Dashboard = () => {
               <div className="p-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                 <UserPlus className="h-4 w-4" />
               </div>
-              <p className="font-bold text-xs text-slate-900 dark:text-slate-200">New Patient</p>
+              <p className="font-bold text-xs text-slate-900 dark:text-slate-200">
+                New Patient
+              </p>
             </button>
 
             <button
@@ -304,7 +414,9 @@ export const Dashboard = () => {
               <div className="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
                 <UserCheck className="h-4 w-4" />
               </div>
-              <p className="font-bold text-xs text-slate-900 dark:text-slate-200">Issue Token</p>
+              <p className="font-bold text-xs text-slate-900 dark:text-slate-200">
+                Issue Token
+              </p>
             </button>
 
             <button
@@ -314,7 +426,9 @@ export const Dashboard = () => {
               <div className="p-2 bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-lg group-hover:bg-orange-600 group-hover:text-white transition-colors">
                 <Pill className="h-4 w-4" />
               </div>
-              <p className="font-bold text-xs text-slate-900 dark:text-slate-200">Add Medicine</p>
+              <p className="font-bold text-xs text-slate-900 dark:text-slate-200">
+                Add Medicine
+              </p>
             </button>
           </div>
         </div>

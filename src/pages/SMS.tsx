@@ -84,7 +84,7 @@ export const SMS = () => {
     try {
       const data = await patientService.searchPatient(phoneSearch);
       setSelectedPatient(data.data);
-    } catch (err) {
+    } catch {
       showToast('Patient not found', 'error');
       setSelectedPatient(null);
     }
@@ -106,7 +106,7 @@ export const SMS = () => {
       try {
         const allPatients = await patientService.getPatients(1, 1000);
         numbers = allPatients.data.map((p: any) => p.phone);
-      } catch (err) {
+      } catch {
         showToast('Failed to fetch patients for bulk SMS', 'error');
         return;
       }

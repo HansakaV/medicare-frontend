@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Activity,
@@ -6,8 +6,6 @@ import {
   Clock,
   Package,
   CreditCard,
-  MessageSquare,
-  ArrowRight,
   Shield,
   Check,
 } from "lucide-react";
@@ -17,7 +15,6 @@ import medicalVideo from "../assets/medicare_hero.mp4";
 
 export const Landing = () => {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState(0);
 
   useEffect(() => {
     // Entrance animation
@@ -35,10 +32,6 @@ export const Landing = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = parseInt(
-              entry.target.getAttribute("data-index") || "0",
-            );
-            setActiveSection(index);
             entry.target.classList.add("is-visible");
           }
         });

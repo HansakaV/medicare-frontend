@@ -18,7 +18,7 @@ import { useToast } from '../components/Toast';
 
 export const Patients = () => {
   const { showToast, ToastContainer } = useToast();
-  const [patients, setPatients] = useState([]);
+  const [patients, setPatients] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
